@@ -1,5 +1,5 @@
 require "vls/version"
 
-module Vls
-  # Your code goes here...
+module VersionLS
+
 end
