@@ -5,5 +5,16 @@
 
 require 'vls'
 
-puts VersionLS.vls
+puts "vls (VersionLS): #{VersionLS::VERSION}"
 
+if ARGV.empty?
+  puts "Usage:"
+  puts "$ vls <gem names>"
+  puts "where gem names are required before modules are listed."
+else
+  ARGV.each {|pkg| require pkg}
+
+  VersionLS.vls.each do |mod|
+    puts "#{mod[0]}, #{mod[1]}"
+  end
+end
