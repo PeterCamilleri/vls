@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+#
+# Standalone execution of the fOOrth environment.
+#
+
+require 'vls'
+
+puts VersionLS.vls
+

@@ -38,5 +38,3 @@ task :vers do |t|
   puts
   puts "vls (VersionLS) version = #{VersionLS::VERSION}"
 end
-
-
