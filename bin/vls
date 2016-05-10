@@ -6,13 +6,25 @@
 require 'vls'
 
 puts "vls (VersionLS): #{VersionLS::VERSION}"
+puts
 
 if ARGV.empty?
-  puts "Usage:"
-  puts "$ vls <gem names>"
-  puts "where gem names are required before modules are listed."
+  puts "Usage template:"
+  puts "$ vls <names>"
+  puts " <names> are gems/files to be required before modules are listed."
 else
-  ARGV.each {|pkg| require pkg}
+  no_good = false
+
+  ARGV.each do |pkg|
+    begin
+      require pkg
+    rescue LoadError
+      puts "Error loading #{pkg}"
+      no_good = true
+    end
+  end
+
+  exit if no_good
 
   VersionLS.vls.each do |mod|
     puts "#{mod[0]}, #{mod[1]}"
