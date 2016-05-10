@@ -18,8 +18,8 @@ else
   ARGV.each do |pkg|
     begin
       require pkg
-    rescue LoadError
-      puts "Error loading #{pkg}"
+    rescue LoadError, StandardError => error
+      puts "Error loading #{pkg}, #{error.message}"
       no_good = true
     end
   end
