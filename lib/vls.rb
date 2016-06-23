@@ -7,7 +7,12 @@ module VersionLS
   #Execute the core of the vls command and return an array of
   #[module, version] arrays.
   def self.vls
-    modules.map { |mod| [mod, mod.const_get(:VERSION)] }
+    modules.map do |mod|
+      version = mod.const_get(:VERSION)
+      version = version::STRING if version.is_a?(Module)
+
+      [mod, version]
+    end
   end
 
   #Get a list of modules that have VERSION info.

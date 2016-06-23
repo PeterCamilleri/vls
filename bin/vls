@@ -27,7 +27,6 @@ else
       end
     rescue LoadError, StandardError => error
       puts "Error loading #{pkg}, #{error.message}"
-      puts Dir.getwd
       no_good = true
     end
   end
