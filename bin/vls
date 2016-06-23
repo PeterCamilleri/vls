@@ -12,14 +12,22 @@ if ARGV.empty?
   puts "Usage template:"
   puts "$ vls <names>"
   puts " <names> are gems/files to be required before modules are listed."
+  puts
+  puts "Note:"
+  puts " To specify a file instead of a gem, a '.rb' extension is required."
 else
   no_good = false
 
   ARGV.each do |pkg|
     begin
-      require pkg
+      if pkg.downcase.end_with?('.rb')
+        require Dir.getwd + '/' + pkg
+      else
+        require pkg
+      end
     rescue LoadError, StandardError => error
       puts "Error loading #{pkg}, #{error.message}"
+      puts Dir.getwd
       no_good = true
     end
   end
