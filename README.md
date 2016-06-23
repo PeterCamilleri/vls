@@ -49,6 +49,16 @@ module/classes are displayed with their VERSION information. For example:
     Rails, 4.2.6
     ThreadSafe, 0.3.5
 
+In order to use relative paths instead of the gem search path, the .rb extension
+needs to be specified on the target file.
+
+    $ vls ruby_sscanf.rb
+    vls (VersionLS): 0.3.0
+
+    FormatEngine, 0.7.2
+    Gem, 2.2.2
+    RubySscanf, 0.2.3
+
 The vls utility is also available for use within an application. It may be
 accessed with:
 ```ruby
