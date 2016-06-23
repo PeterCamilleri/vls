@@ -33,30 +33,21 @@ is:
 where names is a list of gems and/or files to be required before the
 module/classes are displayed with their VERSION information. For example:
 
-    C:\Sites\vls>vls fOOrth
-    vls (VersionLS): 0.1.0
+    $ vls rails
+    vls (VersionLS): 0.3.0
 
-    Bignum, 0.0.5
-    Complex, 0.0.5
-    Date::Infinity, 0.0.5
-    FalseClass, 0.0.5
-    Fixnum, 0.0.5
-    Float, 0.0.5
-    FormatEngine, 0.7.2
-    FullClone, 0.0.5
+    ActionPack, 4.2.6
+    ActiveSupport, 4.2.6
+    ActiveSupport::Logger, 1.2.7
     Gem, 2.2.2
-    InArray, 0.1.5
-    Integer, 0.0.5
-    MiniReadline, 0.4.8
-    NilClass, 0.0.5
-    Numeric, 0.0.5
-    Rational, 0.0.5
-    Regexp, 0.0.5
-    RubySscanf, 0.2.1
-    SafeClone, 0.0.3
-    Symbol, 0.0.5
-    TrueClass, 0.0.5
-    XfOOrth, 0.6.1
+    I18n, 0.7.0
+    JSON, 1.8.3
+    Logger, 1.2.7
+    OpenSSL, 1.1.0
+    Psych, 2.0.5
+    Rack, [1, 3]
+    Rails, 4.2.6
+    ThreadSafe, 0.3.5
 
 The vls utility is also available for use within an application. It may be
 accessed with:
