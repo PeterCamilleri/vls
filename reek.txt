@@ -1,6 +1,1 @@
-lib/vls.rb -- 4 warnings:
-  [5]:IrresponsibleModule: VersionLS has no descriptive comment [https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md]
-  [22]:UncommunicativeVariableName: VersionLS#self.modules has the variable name 'a' [https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md]
-  [22]:UncommunicativeVariableName: VersionLS#self.modules has the variable name 'b' [https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md]
-  [21]:UncommunicativeVariableName: VersionLS#self.modules has the variable name 'c' [https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md]
-4 total warnings
+0 total warnings
