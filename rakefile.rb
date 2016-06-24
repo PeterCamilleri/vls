@@ -30,7 +30,7 @@ end
 
 desc "Run a scan for smelly code!"
 task :reek do |t|
-  `reek --no-color lib > reek.txt`
+  `reek --no-color lib bin > reek.txt`
 end
 
 desc "What version of vls is this?"
