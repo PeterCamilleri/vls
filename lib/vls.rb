@@ -2,17 +2,55 @@
 
 require_relative "vls/version"
 
+#An addition to the Object class for vls support.
+class Object
+  #Get the vls version string from this module.
+  def to_vls_version_string
+    "version #{self.class} ???"
+  end
+end
+
+#An addition to the String class for vls support.
+class String
+  #Get this string as a vls version string.
+  def to_vls_version_string
+    self
+  end
+end
+
+#An addition to the Module class for vls support.
+class Module
+  #Get the vls version string from this module.
+  def to_vls_version_string
+    self::STRING
+  rescue
+    "version module ???"
+  end
+end
+
+#An addition to the Array class for vls support.
+class Array
+  #Get the vls version string from this array.
+  def to_vls_version_string
+    self.join('.')
+  rescue
+    "version array ???"
+  end
+end
+
 # The Version LiSt utility module.
 module VersionLS
-
   #Execute the core of the vls command and return an array of
   #[module, version] arrays.
   def self.vls
     modules.map do |mod|
-      version = mod.const_get(:VERSION)
-      version = version::STRING if version.is_a?(Module)
+      begin
+        version = mod::VERSION
+      rescue
+        version = 'version ???'
+      end
 
-      [mod, version]
+      [mod, version.to_vls_version_string]
     end
   end
 
@@ -26,5 +64,4 @@ module VersionLS
 
     mods - [VersionLS]
   end
-
 end
