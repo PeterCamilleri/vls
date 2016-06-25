@@ -25,4 +25,18 @@ class VLSTester < Minitest::Test
   def test_that_it_can_find_versions_too
     assert(VersionLS.vls)
   end
+
+  def test_that_modules_become_versions
+    assert_equal(VersionLS::STRING, VersionLS.to_vls_version_string)
+  end
+
+  def test_that_arrays_become_versions
+    assert_equal("1.2.3", [1,2,3].to_vls_version_string)
+  end
+
+  def test_for_failure_cases
+    assert_equal("version VLSTester ???", VLSTester.to_vls_version_string)
+    assert_equal("version Array ???", [].to_vls_version_string)
+    assert_equal("version Array ???", [1,2,3,4,5,6].to_vls_version_string)
+  end
 end

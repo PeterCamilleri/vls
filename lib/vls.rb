@@ -24,7 +24,7 @@ class Module
   def to_vls_version_string
     self::STRING
   rescue
-    "version module ???"
+    "version #{self} ???"
   end
 end
 
@@ -32,9 +32,7 @@ end
 class Array
   #Get the vls version string from this array.
   def to_vls_version_string
-    self.join('.')
-  rescue
-    "version array ???"
+    (1..5) === self.length ? self.join('.') : super
   end
 end
 

@@ -1,3 +1,3 @@
 module VersionLS
-  VERSION = "0.3.1"
+  STRING = VERSION = "0.3.2"
 end
