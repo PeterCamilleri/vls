@@ -20,7 +20,6 @@ def vls_show_help
   puts "$ vls <options> <names>"
   puts
   puts "<options>"
-  puts "  --all,  -a     = Show all modules, event those with no version info."
   puts "  --help, -h, -? = Display this text and exit."
   puts "  --raw,  -r     = Display results with no header text."
   puts
