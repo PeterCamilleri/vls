@@ -33,8 +33,7 @@ def vls_show_help
 end
 
 load_list = []
-show_all = false
-no_header = false
+show_all = no_header = false
 
 ARGV.each do |arg|
   case arg
