@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 #
 # The vls command line utility script.
-#
 
 require_relative '../lib/vls'
 
@@ -12,10 +11,8 @@ end
 
 def vls_show_help
   vls_show_header
-
   puts VersionLS::DESCRIPTION
   puts
-
   puts "Usage template:"
   puts "$ vls <options> <names>"
   puts
@@ -25,14 +22,12 @@ def vls_show_help
   puts
   puts "<names> are gems/files to be required before modules are listed."
   puts
-
   puts "Note:"
   puts " To specify a file instead of a gem, a '.rb' extension is required."
   exit
 end
 
-load_list = []
-no_header = false
+load_list, no_header = [], false
 
 ARGV.each do |arg|
   case arg
@@ -62,8 +57,8 @@ load_list.each do |pkg|
   end
 end
 
-exit if errors_found
-
-VersionLS.vls.each do |mod|
-  puts "#{mod[0]}, #{mod[1]}"
+unless errors_found
+  VersionLS.vls.each do |mod|
+    puts "#{mod[0]}, #{mod[1]}"
+  end
 end
