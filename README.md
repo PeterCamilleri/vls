@@ -71,6 +71,23 @@ Note that the vls method does not accept a list of modules to be required. It
 is assumed that when embedded within an application, the needed facilities
 would have already been loaded.
 
+## The Rails Console
+
+If the vls gem has been added to a rails project, its functionality is also
+easily accessed via the rails console:
+
+    rails console
+
+followed by
+
+```ruby
+VersionLS.ls
+```
+
+will create a formatted listing of the modules with version info of the module
+load out of the web site.
+
+
 ## Contributing
 
 #### Plan A
