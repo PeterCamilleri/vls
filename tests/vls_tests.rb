@@ -13,6 +13,8 @@ class VLSTester < Minitest::Test
   def test_the_basics
     assert(VersionLS, "The module VersionLS should exist.")
     assert_equal(String, VersionLS::VERSION.class)
+    assert_equal(String, VersionLS::STRING.class)
+    assert_equal(String, VersionLS::DESCRIPTION.class)
   end
 
   def test_that_it_can_find_modules
