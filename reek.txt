@@ -1,1 +1,3 @@
-0 total warnings
+lib/vls.rb -- 1 warning:
+  [25]:ControlParameter: VersionLS#self.modules is controlled by argument show_all [https://github.com/troessner/reek/blob/master/docs/Control-Parameter.md]
+1 total warning
