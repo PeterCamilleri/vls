@@ -5,6 +5,12 @@ require_relative "vls/version"
 
 # The Version LiSt utility module.
 module VersionLS
+  #Perform a Versioned LiSt to the console.
+  def self.ls
+    vls.each{|mod| puts "#{mod[0]}, #{mod[1]}"}
+    nil
+  end
+
   #Execute the core of the vls command and return an array of
   #[module, version] arrays.
   def self.vls

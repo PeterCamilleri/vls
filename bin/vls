@@ -53,4 +53,4 @@ load_list.each do |pkg|
   end
 end
 
-VersionLS.vls.each{|mod| puts "#{mod[0]}, #{mod[1]}"} unless errors_found
+VersionLS.ls unless errors_found
