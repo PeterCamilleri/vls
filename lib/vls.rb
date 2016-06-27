@@ -7,8 +7,8 @@ require_relative "vls/version"
 module VersionLS
   #Execute the core of the vls command and return an array of
   #[module, version] arrays.
-  def self.vls(show_all=nil)
-    modules(show_all).map do |mod|
+  def self.vls
+    modules.map do |mod|
       begin
         version = mod::VERSION
       rescue
@@ -20,11 +20,13 @@ module VersionLS
   end
 
   #Get a list of modules that have VERSION info.
-  def self.modules(show_all)
-    mods = ObjectSpace.each_object(Module).select do |mod|
-      show_all || mod.const_defined?("VERSION")
-    end.sort do
-      |first, second| first.name <=> second.name
+  def self.modules
+    mods = ObjectSpace.each_object(Module)
+    .select do |mod|
+      mod.const_defined?("VERSION")
+    end
+    .sort do |first, second|
+      first.name <=> second.name
     end
 
     mods - [VersionLS]
