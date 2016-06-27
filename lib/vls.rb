@@ -21,13 +21,13 @@ module VersionLS
 
   #Get a list of modules that have VERSION info.
   def self.modules
-    mods = ObjectSpace.each_object(Module)
-    .select do |mod|
-      mod.const_defined?("VERSION")
-    end
-    .sort do |first, second|
-      first.name <=> second.name
-    end
+    mods = ObjectSpace.each_object(Module).
+           select do |mod|
+             mod.const_defined?("VERSION")
+           end.
+           sort do |first, second|
+             first.name <=> second.name
+           end
 
     mods - [VersionLS]
   end
