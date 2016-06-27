@@ -164,7 +164,7 @@ load out of the web site. For example:
 
 It is also possible to incorporate vls data into a view using the vls method
 in a controller and passing the resultant array of data to a view for
-rendering in a web page. This may be useful for an diagnostic or informational
+rendering in a web page. This may be useful for a diagnostic or informational
 page in the web site.
 
 A detailed examination of this task is beyond the scope of this document and
