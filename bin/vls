@@ -18,7 +18,13 @@ def vls_show_help
 
   puts "Usage template:"
   puts "$ vls <options> <names>"
-  puts " <names> are gems/files to be required before modules are listed."
+  puts
+  puts "<options>"
+  puts "  --all,  -a     = Show all modules, event those with no version info."
+  puts "  --help, -h, -? = Display this text and exit."
+  puts "  --raw,  -r     = Display results with no header text."
+  puts
+  puts "<names> are gems/files to be required before modules are listed."
   puts
 
   puts "Note:"
@@ -45,6 +51,7 @@ end
 
 vls_show_help   if     load_list.empty?
 vls_show_header unless no_header
+errors_found = false
 
 load_list.each do |pkg|
   begin
@@ -55,8 +62,11 @@ load_list.each do |pkg|
     end
   rescue LoadError, StandardError => error
     puts "Error loading #{pkg}, #{error.message}"
+    errors_found = true
   end
 end
+
+exit if errors_found
 
 VersionLS.vls.each do |mod|
   puts "#{mod[0]}, #{mod[1]}"
