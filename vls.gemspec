@@ -9,8 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Peter Camilleri"]
   spec.email         = ["peter.c.camilleri@gmail.com"]
 
-  spec.description   = "A command line utility that lists the versions of " +
-                       "modules used by the specified gems/ruby files."
+  spec.description   = VersionLS::DESCRIPTION
   spec.summary       = "A version listing utility"
   spec.homepage      = "http://teuthida-technologies.com/"
   spec.license       = "MIT"

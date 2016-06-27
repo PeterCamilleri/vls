@@ -1,39 +1,56 @@
 #!/usr/bin/env ruby
-#
-# The vls command line utility script.
-#
+#The vls command line utility script.
 
-require 'vls'
+require_relative '../lib/vls'
 
-puts "vls (VersionLS): #{VersionLS::VERSION}"
-puts
-
-if ARGV.empty?
-  puts "Usage template:"
-  puts "$ vls <names>"
-  puts " <names> are gems/files to be required before modules are listed."
+def vls_show_header
+  puts "vls (VersionLS): #{VersionLS::VERSION}"
   puts
-  puts "Note:"
+end
+
+def vls_show_help
+  vls_show_header
+  puts VersionLS::DESCRIPTION
+  puts
+  puts "Usage template:"
+  puts "$ vls <options> <names>"
+  puts "\n<options>"
+  puts "  --help, -h, -? = Display this text and exit."
+  puts "  --raw,  -r     = Display results with no header text."
+  puts "\n<names> are gems/files to be required before modules are listed."
+  puts "\nNote:"
   puts " To specify a file instead of a gem, a '.rb' extension is required."
-else
-  no_good = false
+  exit
+end
 
-  ARGV.each do |pkg|
-    begin
-      if pkg.downcase.end_with?('.rb')
-        require Dir.getwd + '/' + pkg
-      else
-        require pkg
-      end
-    rescue LoadError, StandardError => error
-      puts "Error loading #{pkg}, #{error.message}"
-      no_good = true
-    end
-  end
+load_list, no_header = [], false
 
-  exit if no_good
-
-  VersionLS.vls.each do |mod|
-    puts "#{mod[0]}, #{mod[1]}"
+ARGV.each do |arg|
+  case arg
+  when "--help", "-h", "-?"
+    vls_show_help
+  when "--raw", "-r"
+    no_header = true
+  else
+    load_list << arg
   end
 end
+
+vls_show_help   if     load_list.empty?
+vls_show_header unless no_header
+errors_found = false
+
+load_list.each do |pkg|
+  begin
+    if pkg.downcase.end_with?('.rb')
+      require Dir.getwd + '/' + pkg
+    else
+      require pkg
+    end
+  rescue LoadError, StandardError => error
+    puts "Error loading #{pkg}, #{error.message}"
+    errors_found = true
+  end
+end
+
+VersionLS.ls unless errors_found
