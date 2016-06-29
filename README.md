@@ -65,23 +65,31 @@ accessed with:
 module_version_list = VersionLS.vls
 ```
 This returns an array of entries, sorted by module name, consisting of an
-array with the module and a string with its version.
+array with the module and a string with its version. Also, the Object class
+is monkey patched with the vls method that outputs the information to the
+console.
 
-Note that the vls method does not accept a list of modules to be required. It
+```ruby
+vls
+```
+
+Note that these methods do not accept a list of modules to be required. It
 is assumed that when embedded within an application, the needed facilities
-would have already been loaded.
+would have already been loaded. In addition, the vls listing to the console
+has no header information. If this is desired, the application should do a
+puts of the appropriate descriptive text.
 
 ## The Rails Console
 
-If the vls gem has been added to a rails project, its functionality is also
-easily accessed via the rails console:
+If the vls gem has been added to a rails project (in its Gemfile), its
+functionality is also easily accessed via the rails console:
 
     $ rails console
 
 followed by
 
 ```ruby
-VersionLS.ls
+vls
 ```
 
 will create a formatted listing of the modules with version info of the module
@@ -89,7 +97,7 @@ load out of the web site. For example:
 
     $ rails console
     Loading development environment (Rails 4.2.6)
-    irb(main):001:0> VersionLS.ls
+    irb(main):001:0> vls
     ActionDispatch::Journey::Router, 2.0.0
     ActionMailer, 4.2.6
     ActionPack, 4.2.6
@@ -162,13 +170,12 @@ load out of the web site. For example:
 
 ## Usage in Rails Views
 
-It is also possible to incorporate vls data into a view using the vls method
-in a controller and passing the resultant array of data to a view for
+It is also possible to incorporate vls data into a view using the VersionLS.vls
+method in a controller and passing the resultant array of data to a view for
 rendering in a web page. This may be useful for a diagnostic or informational
-page in the web site.
-
-A detailed examination of this task is beyond the scope of this document and
-readers are advised to consult Ruby on Rails tutorials for more information.
+page in a web site. However, a detailed examination of this task is beyond the
+scope of this document and readers are advised to consult Ruby on Rails
+tutorials for more information.
 
 ## Contributing
 
