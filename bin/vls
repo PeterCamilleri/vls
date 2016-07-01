@@ -12,23 +12,21 @@ def vls_show_help
   puts VersionLS::DESCRIPTION
   puts "\nUsage: $ vls <options> <names>"
   puts "\n<options>"
-  puts "  --filter, -f   = Filter results with string or regular expression."
-  puts "  --help, -h, -? = Display this text and exit."
-  puts "  --raw,  -r     = Display results with no header text."
+  puts "  --filter, -f <s/r> = Filter results by string or regular expression."
+  puts "  --help, -h, -?     = Display this text and exit."
+  puts "  --raw,  -r         = Display results with no header text."
   puts "\n<names> are gems/files to be required before modules are listed."
   puts "\nNote:"
   puts " To specify a file instead of a gem, a '.rb' extension is required."
   exit
 end
 
-load_list, no_header, filter, special = [], false, /./, false
+load_list, no_header, special, option_args = [], false, false, {filter: "/./"}
 
 #Process the script argument list.
 ARGV.each do |arg|
-  case special
-  when :filter
-    filter = (/^\/.*\/$/ =~ arg) ? Regexp.new(arg[1...-1]) : arg
-    special = false
+  if special
+    option_args[special], special = arg, false
   else
     case arg
     when "--filter", "-f"
@@ -61,4 +59,6 @@ load_list.each do |pkg|
   end
 end
 
+filter = option_args[:filter]
+filter = Regexp.new(filter[1...-1]) if /^\/.*\/$/ =~ filter
 VersionLS.ls(filter) unless errors_found
