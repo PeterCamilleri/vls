@@ -25,16 +25,30 @@ The vls gem itself is found at: ( https://rubygems.org/gems/vls )
 
 ## Usage
 
-The vls utility is normally used at the command line. The basic usage template
+The vls utility is normally used at the command line. The usage template
 is:
 
-    $ vls <names>
+    vls (VersionLS): 0.3.6
 
-where names is a list of gems and/or files to be required before the
-module/classes are displayed with their VERSION information. For example:
+    A command line utility that lists the versions of modules used by the specified
+    gems/ruby files.
+
+    Usage: $ vls <options> <names>
+
+    <options>
+      --filter, -f <s/r> = Filter results by string or regular expression.
+      --help, -h, -?     = Display this text and exit.
+      --raw,  -r         = Display results with no header text.
+
+    <names> are gems/files to be required before modules are listed.
+
+    Note:
+     To specify a file instead of a gem, a '.rb' extension is required.
+
+For example:
 
     $ vls rails
-    vls (VersionLS): 0.3.0
+    vls (VersionLS): 0.3.6
 
     ActionPack, 4.2.6
     ActiveSupport, 4.2.6
@@ -53,7 +67,7 @@ In order to use relative paths instead of the gem search path, the .rb extension
 needs to be specified on the target file.
 
     $ vls ruby_sscanf.rb
-    vls (VersionLS): 0.3.0
+    vls (VersionLS): 0.3.6
 
     FormatEngine, 0.7.2
     Gem, 2.2.2
@@ -62,7 +76,7 @@ needs to be specified on the target file.
 The vls utility is also available for use within an application. It may be
 accessed with:
 ```ruby
-module_version_list = VersionLS.vls
+module_version_list = VersionLS.vls(filter=/./)
 ```
 This returns an array of entries, sorted by module name, consisting of an
 array with the module and a string with its version. Also, the Object class
@@ -70,7 +84,7 @@ is monkey patched with the vls method that outputs the information to the
 console.
 
 ```ruby
-vls
+vls(filter=/./)
 ```
 
 Note that these methods do not accept a list of modules to be required. It
@@ -78,6 +92,8 @@ is assumed that when embedded within an application, the needed facilities
 would have already been loaded. In addition, the vls listing to the console
 has no header information. If this is desired, the application should do a
 puts of the appropriate descriptive text.
+
+Both of these methods _do_ take an optional filter string or regular expression.
 
 ## The Rails Console
 
@@ -167,6 +183,19 @@ load out of the web site. For example:
     Zlib, 0.6.0
     => nil
     irb(main):002:0>
+
+Of course, filtering is available at this level too:
+
+    irb(main):003:0> vls 'Rails'
+    Coffee::Rails, 4.1.1
+    Jquery::Rails, 4.1.1
+    Rails, 4.2.6
+    Rails::Html::FullSanitizer, 1.0.3
+    Rails::Html::LinkSanitizer, 1.0.3
+    Rails::Html::Sanitizer, 1.0.3
+    Rails::Html::WhiteListSanitizer, 1.0.3
+    Sass::Rails, 5.0.4
+    Sprockets::Rails, 3.0.4
 
 ## Usage in Rails Views
 

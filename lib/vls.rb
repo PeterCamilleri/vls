@@ -6,15 +6,19 @@ require_relative "vls/version"
 # The Version LiSt utility module.
 module VersionLS
   #Perform a Versioned LiSt to the console.
-  def self.ls
-    vls.each{|mod| puts "#{mod[0]}, #{mod[1]}"}
+  #<br>Parameters
+  #* filter - a string or regex used to filter the list of modules.
+  def self.print_vls(filter)
+    vls(filter).each{|mod| puts "#{mod[0]}, #{mod[1]}"}
     nil
   end
 
   #Execute the core of the vls command and return an array of
   #[module, version] arrays.
-  def self.vls
-    modules.map do |mod|
+  #<br>Parameters
+  #* filter - a string or regex used to filter the list of modules.
+  def self.vls(filter=/./)
+    modules(filter).map do |mod|
       begin
         version = mod::VERSION
       rescue
@@ -26,10 +30,15 @@ module VersionLS
   end
 
   #Get a list of modules that have VERSION info.
-  def self.modules
+  #<br>Parameters
+  #* filter - a string or regex used to filter the list of modules.
+  #<br>Returns
+  #* An array of module objects.
+  def self.modules(filter)
     mods = ObjectSpace.each_object(Module).
            select do |mod|
-             mod.const_defined?("VERSION")
+             mod.const_defined?("VERSION") &&
+             mod.name.partition(filter)[1] != ""
            end.
            sort do |first, second|
              first.name <=> second.name
