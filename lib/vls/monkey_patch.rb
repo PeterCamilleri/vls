@@ -8,8 +8,8 @@ class Object
   end
 
   #A simple shortcut method for ease of use in irb and rails console.
-  def vls
-    VersionLS.ls
+  def vls(filter=/./)
+    VersionLS.ls(filter)
   end
 end
 

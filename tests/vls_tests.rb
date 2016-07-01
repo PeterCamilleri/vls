@@ -18,10 +18,20 @@ class VLSTester < Minitest::Test
   end
 
   def test_that_it_can_find_modules
-    assert_equal(Array, VersionLS.modules.class)
+    assert_equal(Array, VersionLS.modules(/./).class)
 
-    refute(VersionLS.modules.include?(VersionLS))
-    assert(VersionLS.modules.include?(Gem))
+    refute(VersionLS.modules(/./).include?(VersionLS))
+    assert(VersionLS.modules(/./).include?(Gem))
+  end
+
+  def test_that_it_can_find_modules_filtered
+    module_list = VersionLS.modules('Gem')
+    assert_equal(1, module_list.length)
+    assert(VersionLS.modules('Gem').include?(Gem))
+
+    module_list = VersionLS.modules(/^Gem$/)
+    assert_equal(1, module_list.length)
+    assert(VersionLS.modules('Gem').include?(Gem))
   end
 
   def test_that_it_can_find_versions_too
