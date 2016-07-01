@@ -4,16 +4,13 @@
 require_relative '../lib/vls'
 
 def vls_show_header
-  puts "vls (VersionLS): #{VersionLS::VERSION}"
-  puts
+  print "vls (VersionLS): #{VersionLS::VERSION}\n\n"
 end
 
 def vls_show_help
   vls_show_header
   puts VersionLS::DESCRIPTION
-  puts
-  puts "Usage template:"
-  puts "$ vls <options> <names>"
+  puts "\nUsage: $ vls <options> <names>"
   puts "\n<options>"
   puts "  --help, -h, -? = Display this text and exit."
   puts "  --raw,  -r     = Display results with no header text."
@@ -25,6 +22,7 @@ end
 
 load_list, no_header = [], false
 
+#Process the script argument list.
 ARGV.each do |arg|
   case arg
   when "--help", "-h", "-?"
@@ -40,6 +38,7 @@ vls_show_help   if     load_list.empty?
 vls_show_header unless no_header
 errors_found = false
 
+#Require the specified gems and ruby files.
 load_list.each do |pkg|
   begin
     if pkg.downcase.end_with?('.rb')

@@ -6,6 +6,11 @@ class Object
   def to_vls_version_string
     "version #{self.class} ???"
   end
+
+  #A simple shortcut method for ease of use in irb and rails console.
+  def vls
+    VersionLS.ls
+  end
 end
 
 #An addition to the String class for vls support.
