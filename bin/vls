@@ -12,6 +12,7 @@ def vls_show_help
   puts VersionLS::DESCRIPTION
   puts "\nUsage: $ vls <options> <names>"
   puts "\n<options>"
+  puts "  --filter, -f   = Filter results with string or regular expression."
   puts "  --help, -h, -? = Display this text and exit."
   puts "  --raw,  -r     = Display results with no header text."
   puts "\n<names> are gems/files to be required before modules are listed."
@@ -20,17 +21,25 @@ def vls_show_help
   exit
 end
 
-load_list, no_header = [], false
+load_list, no_header, filter, special = [], false, /./, false
 
 #Process the script argument list.
 ARGV.each do |arg|
-  case arg
-  when "--help", "-h", "-?"
-    vls_show_help
-  when "--raw", "-r"
-    no_header = true
+  case special
+  when :filter
+    filter = (/^\/.*\/$/ =~ arg) ? Regexp.new(arg[1...-1]) : arg
+    special = false
   else
-    load_list << arg
+    case arg
+    when "--filter", "-f"
+      special = :filter
+    when "--help", "-h", "-?"
+      vls_show_help
+    when "--raw", "-r"
+      no_header = true
+    else
+      load_list << arg
+    end
   end
 end
 
@@ -52,4 +61,4 @@ load_list.each do |pkg|
   end
 end
 
-VersionLS.ls unless errors_found
+VersionLS.ls(filter) unless errors_found

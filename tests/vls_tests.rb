@@ -32,6 +32,9 @@ class VLSTester < Minitest::Test
     module_list = VersionLS.modules(/^Gem$/)
     assert_equal(1, module_list.length)
     assert(VersionLS.modules('Gem').include?(Gem))
+
+    assert(VersionLS.vls(/^Gem$/))
+    assert_equal(1, VersionLS.vls(/^Gem$/).length)
   end
 
   def test_that_it_can_find_versions_too

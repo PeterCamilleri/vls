@@ -8,6 +8,8 @@ class Object
   end
 
   #A simple shortcut method for ease of use in irb and rails console.
+  #<br>Endemic Code Smells
+  #* :reek:UtilityFunction
   def vls(filter=/./)
     VersionLS.ls(filter)
   end
