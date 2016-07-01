@@ -8,7 +8,7 @@ module VersionLS
   #Perform a Versioned LiSt to the console.
   #<br>Parameters
   #* filter - a string or regex used to filter the list of modules.
-  def self.ls(filter)
+  def self.print_vls(filter)
     vls(filter).each{|mod| puts "#{mod[0]}, #{mod[1]}"}
     nil
   end

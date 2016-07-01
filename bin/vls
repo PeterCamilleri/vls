@@ -61,4 +61,4 @@ end
 
 filter = option_args[:filter]
 filter = Regexp.new(filter[1...-1]) if /^\/.*\/$/ =~ filter
-VersionLS.ls(filter) unless errors_found
+VersionLS.print_vls(filter) unless errors_found
