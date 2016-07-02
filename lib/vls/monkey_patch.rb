@@ -11,7 +11,7 @@ class Object
   #<br>Endemic Code Smells
   #* :reek:UtilityFunction
   def vls(filter=/./)
-    VersionLS.ls(filter)
+    VersionLS.print_vls(filter)
   end
 end
 
