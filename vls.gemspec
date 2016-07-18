@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["peter.c.camilleri@gmail.com"]
 
   spec.description   = VersionLS::DESCRIPTION
-  spec.summary       = "A version listing utility"
+  spec.summary       = "A version listing utility."
   spec.homepage      = "http://teuthida-technologies.com/"
   spec.license       = "MIT"
 
