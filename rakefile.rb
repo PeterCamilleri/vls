@@ -33,6 +33,11 @@ task :reek do |t|
   `reek --no-color lib bin > reek.txt`
 end
 
+desc "Fire up an IRB session with vls preloaded."
+task :console do
+  system "ruby irbt.rb local"
+end
+
 desc "What version of vls is this?"
 task :vers do |t|
   puts
