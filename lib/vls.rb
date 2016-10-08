@@ -44,6 +44,6 @@ module VersionLS
              first.name <=> second.name
            end
 
-    mods - [VersionLS]
+    mods
   end
 end

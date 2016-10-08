@@ -20,7 +20,7 @@ class VLSTester < Minitest::Test
   def test_that_it_can_find_modules
     assert_equal(Array, VersionLS.modules(/./).class)
 
-    refute(VersionLS.modules(/./).include?(VersionLS))
+    assert(VersionLS.modules(/./).include?(VersionLS))
     assert(VersionLS.modules(/./).include?(Gem))
   end
 
