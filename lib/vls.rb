@@ -35,15 +35,10 @@ module VersionLS
   #<br>Returns
   #* An array of module objects.
   def self.modules(filter)
-    mods = ObjectSpace.each_object(Module).
-           select do |mod|
-             mod.const_defined?("VERSION") &&
-             mod.name.partition(filter)[1] != ""
-           end.
-           sort do |first, second|
-             first.name <=> second.name
-           end
+    regex = Regexp.new(filter)
 
-    mods
+    ObjectSpace.each_object(Module)
+      .select {|mod| mod.const_defined?("VERSION") && mod.name =~ regex}
+      .sort {|first, second| first.name <=> second.name}
   end
 end

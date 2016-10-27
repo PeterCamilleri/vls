@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.description   = VersionLS::DESCRIPTION
   spec.summary       = "A version listing utility."
-  spec.homepage      = "http://teuthida-technologies.com/"
+  spec.homepage      = "https://github.com/PeterCamilleri/vls"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(tests)/}) }
